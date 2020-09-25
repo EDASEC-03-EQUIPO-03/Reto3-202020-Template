@@ -24,6 +24,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
 from DISClib.ADT import map as m
+from DISClib.DataStructures import listiterator as it
 import datetime
 assert config
 
@@ -98,15 +99,24 @@ def NuevaSeveridad(Severidad):
 # ==============================
 # Funciones de consulta
 # ==============================
- def Accidente_Fecha_severidad(catalog,fecha):
 
-    Accidentes_fecha= om.get(catalog["Indice_fechas"],fecha)
-    if Accidentes_fecha =! None:
-        Entry=me.getValue()
+def Accidente_Fecha_severidad(catalog,fecha):
+
+    Accidentes_en= om.get(catalog["Indice_fechas"],fecha)
+    if Accidentes_en != None:
+        Accidentes_fecha=me.getValue(Accidentes_fecha)
+        lista_llaves= m.keySet(Accidentes_fecha)
+        iterador= it.newIterator(lista_llaves)
+        while it.hasNext(iterador):
+            severidad= it.next(iterador)
+            key_value=m.get(Accidentes_fecha,severidad)
+            severidad_valor=me.getKey(key_value)
+            
+   
         
+    return "hola"
 
 
 # ==============================
 # Funciones de Comparacion
 # ==============================
-def compare_accidentes():

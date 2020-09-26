@@ -24,7 +24,9 @@ import sys
 import config
 from DISClib.ADT import list as lt
 from App import controller
+from DISClib.DataStructures import listiterator as it
 assert config
+
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -38,7 +40,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-crimefile = 'crime-utf8.csv'
+Archiaccidentes = 'US_Accidents_Dec19.csv'
 
 # ___________________________________________________
 #  Menu principal
@@ -51,7 +53,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de accidentes")
-    print("3- Requerimento 1")
+    print("3- Cantidad de accidentes en una fecha")
     print("4- Requerimento 2")
     print("0- Salir")
     print("*******************************************")
@@ -67,17 +69,29 @@ while True:
     if int(inputs[0]) == 1:
         print("\nInicializando....")
         # cont es el controlador que se usará de acá en adelante
-        cont = controller.init()
+        Analyzer = controller.init()
+        print("Se ha inicializado el catalogo...")
 
     elif int(inputs[0]) == 2:
-        print("\nCargando información de crimenes ....")
+        print("\nCargando información de accidentes ....\n")
+        controller.loadData(Analyzer,Archiaccidentes)
+        print('Accidentes cargados: ' + str(controller.sizeAccidentes(Analyzer)))
+        print('Fechas cargadas: ' + str(controller.sizeArbol(Analyzer)),"\n")
 
     elif int(inputs[0]) == 3:
-        print("\nBuscando crimenes en un rango de fechas: ")
+        Fecha=input('Ingrese una fecha en este formato (YYYY-MM-DD)\n>')
+        tamaño,lista=controller.Dar_cantidad_por_fecha(Analyzer,Fecha)
+        print("\nSe encontraron",tamaño,"accidentes registrados en la fecha",Fecha)
+        iterador=it.newIterator(lista)
+        while it.hasNext(iterador):
+            element=it.next(iterador)
+            Severidad=element["Severidad"]
+            size=lt.size(element["Accidentes"])
+            print("La severidad",Severidad,"tiene",size,"Accidentes")
 
 
     elif int(inputs[0]) == 4:
-        print("\nRequerimiento No 1 del reto 3: ")
+        print("\nnadaxd: ")
 
     else:
         sys.exit(0)

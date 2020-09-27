@@ -86,7 +86,7 @@ while True:
         while it.hasNext(iterador):
             element=it.next(iterador)
             Severidad=element["Severidad"]
-            size=lt.size(element["Accidentes"])
+            size=lt.size(element["Lista_Accidentes"])
             print("La severidad",Severidad,"tiene",size,"Accidentes")
 
 

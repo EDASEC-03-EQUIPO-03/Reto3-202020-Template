@@ -120,6 +120,7 @@ def size_Arbol(catalog):
 
     size = om.size(catalog["Indice_fechas"])
     return size
+ lst = om.values(analyzer['dateIndex'], initialDate, finalDate,)
 
 def tamaño_Accidentes(catalog):
     size= lt.size(catalog["Accidentes"])
